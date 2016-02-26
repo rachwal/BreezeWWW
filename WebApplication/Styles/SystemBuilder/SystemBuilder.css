@@ -1,0 +1,11 @@
+﻿.available-magnet {
+    fill: yellow;
+}
+
+.available-cell rect {
+    stroke-dasharray: 5, 2;
+}
+
+.selected-cell rect {
+    stroke: blue;
+}
