@@ -1,0 +1,59 @@
+﻿@model Breeze.Components.Model.CoreComponent
+@{
+    ViewBag.Title = "Components";
+    ViewBag.SubTitle = "Add";
+}
+
+@section Menu {
+    @Scripts.Render("~/Scripts/Components/Add/menu")
+}
+
+@Styles.Render("~/AdminLTE/plugins/select2/css")
+@Styles.Render("~/AdminLTE/dist/css")
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <div class="box-tools pull-right"></div>
+            </div>
+            <div class="box-body no-padding">
+                @using (Html.BeginForm("Add", "Components", null, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="mailbox-controls">
+                        <div class="btn-group">
+                            <a href="@Url.Action("Index", "Components")" class="btn btn-app"><i class="fa fa-arrow-circle-o-left "></i>Back</a>
+                            <button id="add-component-save" type="submit" class="btn btn-app"><i class="fa fa-save"></i>Save</button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.BreezeId)
+                            @Html.TextBoxFor(model => model.BreezeId, new {@readonly = true, @class = "form-control"})
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name)
+                            @Html.TextBoxFor(model => model.Name, new {@class = "form-control"})
+                        </div>
+                        <div class="form-group">
+                            <label>In Ports</label>
+                            <select id="add-component-in-ports-list" class="form-control select2" multiple="multiple" data-placeholder="Enter a Name" style="width: 100%;"></select>
+                        </div>
+                        <div class="form-group">
+                            <label>Out Ports</label>
+                            <select id="add-component-out-ports-list" class="form-control select2" multiple="multiple" data-placeholder="Enter a Name" style="width: 100%;"></select>
+                        </div>
+                    </div>
+                    <div id="add-component-in-ports-model"></div>
+                    <div id="add-component-out-ports-model"></div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/AdminLTE/plugins/select2/js")
+    @Scripts.Render("~/Scripts/Components/Add")
+}

@@ -1,0 +1,155 @@
+﻿@model IEnumerable<Breeze.SystemBuilder.Model.ISystemBuilderComponent>
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "System Builder";
+    ViewBag.SubTitle = "";
+}
+
+@section Menu {
+    @Scripts.Render("~/Scripts/SystemBuilder/menu")
+}
+
+@Styles.Render("~/Styles/SystemBuilder")
+@Styles.Render("~/Scripts/SystemBuilder/plugins/jointjs/css")
+@Styles.Render("~/Scripts/SystemBuilder/plugins/jscrollpane/css")
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <div class="box-tools pull-right"></div>
+            </div>
+            <div class="box-body no-padding">
+                <div class="mailbox-controls">
+                    <div class="btn-group">
+                        <a class="btn btn-app"><i class="fa fa-play"></i>Activate All</a>
+                    </div>
+                    <div class="btn-group">
+                        <a class="btn btn-app"><i class="fa fa-play-circle-o"></i>Activate</a>
+                        <a class="btn btn-app"><i class="fa fa-repeat" id="system-builder-restart"></i>Restart</a>
+                        <a class="btn btn-app"><i class="fa fa-pause"></i>Pause</a>
+                    </div>
+                    <div class="btn-group">
+                        <a class="btn btn-app"><i class="fa fa-edit"></i>Edit</a>
+                        <a class="btn btn-app" id="system-builder-save"><i class="fa fa-save"></i>Save</a>
+                        <a class="btn btn-app" id="system-builder-remove-selected"><i class="fa fa-times"></i>Remove</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h4 class="box-title">Components</h4>
+            </div>
+            <div class="box-body">
+                <div id="external-events">
+                    @for (var i = 0; i < Model.Count(); i++)
+                    {
+                        var element = Model.ElementAt(i);
+                        <div class="external-event" data-breeze-name="@element.Name" data-breeze-id="@element.BreezeId" data-breeze-color="@element.Color">@element.Name</div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <h3 class="box-title">Selected Item Properties</h3>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered text-center">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div id="selected-item-name"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <ul class="fc-color-picker" id="color-chooser">
+                                <li>
+                                    <a class="text-blue" href="#">
+                                        <i class="fa fa-square"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="text-light-blue" href="#">
+                                        <i class="fa fa-square"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="text-yellow" href="#">
+                                        <i class="fa fa-square"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="text-orange" href="#">
+                                        <i class="fa fa-square"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="text-green" href="#">
+                                        <i class="fa fa-square"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="text-lime" href="#">
+                                        <i class="fa fa-square"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="text-red" href="#">
+                                        <i class="fa fa-square"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="text-purple" href="#">
+                                        <i class="fa fa-square"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="text-fuchsia" href="#">
+                                        <i class="fa fa-square"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="text-navy" href="#">
+                                        <i class="fa fa-square"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10">
+        <div class="box box-solid">
+            <div class="box-header with-border">
+                <i class="fa fa-bar-chart-o"></i>
+                <h3 class="box-title">System Builder</h3>
+                <div class="box-tools pull-right"></div>
+            </div>
+            <div id="system-builder-operation-area" class="box-body scroll-pane">
+                <div id="interactive">
+                    <div class="paper" id="paper-mark-available"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Hidden("user-id", @User.Identity.GetUserId())
+
+@section Scripts {
+    @Scripts.Render("~/AdminLTE/plugins/jquery-ui/js")
+    @Scripts.Render("~/Scripts/SystemBuilder/plugins/loadsh/js")
+    @Scripts.Render("~/Scripts/SystemBuilder/plugins/backbone/js")
+    @Scripts.Render("~/Scripts/SystemBuilder/plugins/jointjs/js")
+    @Scripts.Render("~/Scripts/SystemBuilder/plugins/touch-punch/js")
+    @Scripts.Render("~/Scripts/SystemBuilder/plugins/jscrollpane/js")
+    @Scripts.Render("~/Scripts/SystemBuilder")
+}
